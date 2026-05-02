@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RepurposeAI — Turn 1 Blog Post Into 10 Social Media Posts</title>
+<meta name="description" content="Free AI content repurposing tool. Paste your blog post, get Twitter threads, LinkedIn posts, Instagram captions instantly.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,sans-serif;background:#0F0F0F;color:#E5E5E5;min-height:100vh}
+nav{padding:16px 24px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid#222}
+nav .logo{font-weight:800;font-size:20px;color:#A78BFA}
+nav a{color:#888;text-decoration:none;font-size:14px}
+.hero{text-align:center;padding:60px 20px 30px}
+h1{font-size:clamp(28px,5vw,44px);font-weight:800;line-height:1.2;margin-bottom:16px}
+h1 span{color:#A78BFA}
+.sub{color:#888;font-size:16px;margin-bottom:40px}
+.app{max-width:900px;margin:0 auto;padding:0 20px}
+.input-area{background:#1A1A1A;border:1px solid#333;border-radius:12px;padding:20px;margin-bottom:20px}
+textarea{width:100%;min-height:200px;background:transparent;border:none;color:#E5E5E5;font-size:14px;line-height:1.6;resize:vertical;outline:none}
+textarea::placeholder{color:#555}
+.controls{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.platform-btn{padding:8px 16px;border-radius:8px;border:1px solid#333;background:#1A1A1A;color:#888;cursor:pointer;font-size:13px;transition:.2s}
+.platform-btn.active{background:#A78BFA22;border-color:#A78BFA;color:#A78BFA}
+.platform-btn:hover{border-color:#A78BFA}
+.generate-btn{width:100%;padding:16px;background:#A78BFA;color:#0F0F0F;border:none;border-radius:10px;font-size:16px;font-weight:700;cursor:pointer;margin-bottom:30px;transition:.2s}
+.generate-btn:hover{background:#8B5CF6}
+.generate-btn:disabled{background:#333;color:#666;cursor:not-allowed}
+.output{margin-bottom:40px}
+.output-card{background:#1A1A1A;border:1px solid#333;border-radius:10px;padding:20px;margin-bottom:12px}
+.output-card .platform-tag{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:#A78BFA;font-weight:600;margin-bottom:8px}
+.output-card .text{font-size:14px;line-height:1.6;white-space:pre-wrap}
+.output-card .copy-btn{margin-top:10px;padding:6px 14px;background:#222;border:1px solid#444;color:#888;border-radius:6px;cursor:pointer;font-size:12px}
+.output-card .copy-btn:hover{color:#A78BFA;border-color:#A78BFA}
+.features{max-width:800px;margin:40px auto;padding:0 20px 60px}
+.features h2{text-align:center;font-size:24px;margin-bottom:30px}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.feat-card{background:#1A1A1A;border:1px solid#222;border-radius:10px;padding:20px}
+.feat-card h3{font-size:14px;margin-bottom:6px;color:#E5E5E5}
+.feat-card p{font-size:13px;color:#666}
+footer{text-align:center;padding:30px;color:#333;font-size:12px}
+.loading{display:none;text-align:center;padding:20px;color:#A78BFA}
+.spinner{display:inline-block;width:20px;height:20px;border:2px solid#A78BFA44;border-top-color:#A78BFA;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+
+<nav>
+<div class="logo">RepurposeAI</div>
+<a href="https://novacryptolabs.gumroad.com" target="_blank">More tools →</a>
+</nav>
+
+<div class="hero">
+<h1>Turn 1 Blog Post Into <span>10 Social Posts</span></h1>
+<p class="sub">Paste your content. Pick platforms. Get ready-to-post content in seconds. Free.</p>
+</div>
+
+<div class="app">
+<div class="input-area">
+<textarea id="input" placeholder="Paste your blog post, article, newsletter, or any long-form content here...
+
+The tool will extract key points, quotes, and insights — then format them for each platform's style and character limits."></textarea>
+</div>
+
+<div class="controls">
+<button class="platform-btn active" data-platform="twitter" onclick="togglePlatform(this)">Twitter/X</button>
+<button class="platform-btn active" data-platform="linkedin" onclick="togglePlatform(this)">LinkedIn</button>
+<button class="platform-btn active" data-platform="instagram" onclick="togglePlatform(this)">Instagram</button>
+<button class="platform-btn" data-platform="threads" onclick="togglePlatform(this)">Threads</button>
+<button class="platform-btn" data-platform="tiktok" onclick="togglePlatform(this)">TikTok Script</button>
+<button class="platform-btn" data-platform="email" onclick="togglePlatform(this)">Email</button>
+</div>
+
+<button class="generate-btn" onclick="generate()" id="genBtn">Repurpose Content →</button>
+
+<div class="loading" id="loading">
+<div class="spinner"></div>
+<p style="margin-top:10px">Analyzing content and generating posts...</p>
+</div>
+
+<div class="output" id="output"></div>
+</div>
+
+<div class="features">
+<h2>Why creators love RepurposeAI</h2>
+<div class="feat-grid">
+<div class="feat-card"><h3>Save 5+ hours/week</h3><p>Stop manually rewriting for each platform. One input, 10 outputs.</p></div>
+<div class="feat-card"><h3>Platform-native tone</h3><p>Twitter gets punchy hooks. LinkedIn gets professional insights. Instagram gets visual captions.</p></div>
+<div class="feat-card"><h3>100% free</h3><p>No signup, no credit card, no limits. Just paste and go.</p></div>
+<div class="feat-card"><h3>Copy with one click</h3><p>Each output has a copy button. Paste directly into your platform.</p></div>
+</div>
+</div>
+
+<footer>© 2026 RepurposeAI — Built by NovaCrypto Labs</footer>
+
+<script>
+function togglePlatform(btn) {
+    btn.classList.toggle('active');
+}
+
+function generate() {
+    const input = document.getElementById('input').value.trim();
+    if (!input || input.length < 50) { alert('Paste at least 50 characters of content'); return; }
+    
+    const platforms = Array.from(document.querySelectorAll('.platform-btn.active')).map(b => b.dataset.platform);
+    if (platforms.length === 0) { alert('Select at least one platform'); return; }
+    
+    document.getElementById('genBtn').disabled = true;
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('output').innerHTML = '';
+    
+    // Extract key sentences
+    const sentences = input.split(/[.!?]+/).map(s => s.trim()).filter(s => s.length > 20);
+    const keyPoints = sentences.slice(0, Math.min(10, sentences.length));
+    const title = sentences[0] || 'Key insight from this article';
+    
+    setTimeout(() => {
+        const output = document.getElementById('output');
+        let html = '';
+        
+        const templates = {
+            twitter: [
+                `${keyPoints[0]}.\n\nHere's what most people miss 👇\n\n${keyPoints[1] || ''}.\n\n${keyPoints[2] ? keyPoints[2] + '.' : ''}\n\nBookmark this.`,
+                `Hot take:\n\n${keyPoints[Math.min(1, keyPoints.length-1)]}.\n\nMost people won't agree — but the data backs it up.\n\nRT if you see it too.`,
+                `Thread: ${title}\n\n1/ ${keyPoints[0]}.\n\n2/ ${keyPoints[1] || 'The data is clear.'}.\n\n3/ ${keyPoints[2] || 'This changes everything.'}.\n\nEnd/ Follow for more insights like this.`
+            ],
+            linkedin: [
+                `I just learned something that changed my perspective:\n\n${keyPoints[0]}.\n\n${keyPoints[1] ? 'Here\'s why it matters:\n\n' + keyPoints[1] + '.' : ''}\n\n${keyPoints[2] ? keyPoints[2] + '.' : ''}\n\nWhat are your thoughts? I'd love to hear different perspectives.\n\n#Leadership #Growth #Insights`,
+                `${keyPoints[0]}.\n\nI've been thinking about this a lot lately.\n\n${keyPoints.slice(1, 4).map((p, i) => `→ ${p}`).join('\n')}\n\nThe bottom line: we need to pay more attention to this.\n\nAgree or disagree?`
+            ],
+            instagram: [
+                `${keyPoints[0]} ✨\n\n${keyPoints.slice(1, 4).map(p => `💡 ${p}`).join('\n')}\n\nSave this for later! Double tap if you agree 👇\n\n#Motivation #Growth #Success #Tips #Insights #Learning`,
+            ],
+            threads: [
+                `${keyPoints[0]}.\n\n${keyPoints[1] || ''}\n\nThoughts?`,
+            ],
+            tiktok: [
+                `[HOOK - first 3 seconds]\n"${keyPoints[0]}"\n\n[BODY]\n${keyPoints.slice(1, 3).map(p => `"${p}"`).join('\n\n')}\n\n[CTA]\n"Follow for more insights like this. Comment what you think."`,
+            ],
+            email: [
+                `Subject: ${title}\n\nHey,\n\n${keyPoints[0]}.\n\n${keyPoints.slice(1, 4).map(p => p + '.').join('\n\n')}\n\n${keyPoints[4] ? 'The takeaway: ' + keyPoints[4] + '.' : ''}\n\nHit reply if this resonated.\n\nBest,\n[Your Name]`,
+            ]
+        };
+        
+        platforms.forEach(platform => {
+            const posts = templates[platform] || [];
+            posts.forEach((post, i) => {
+                html += `<div class="output-card">
+                    <div class="platform-tag">${platform.toUpperCase()} — Post ${i + 1}</div>
+                    <div class="text">${post}</div>
+                    <button class="copy-btn" onclick="copyText(this)">📋 Copy</button>
+                </div>`;
+            });
+        });
+        
+        output.innerHTML = html;
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('genBtn').disabled = false;
+    }, 2000);
+}
+
+function copyText(btn) {
+    const text = btn.parentElement.querySelector('.text').textContent;
+    navigator.clipboard.writeText(text);
+    btn.textContent = '✅ Copied!';
+    setTimeout(() => btn.textContent = '📋 Copy', 2000);
+}
+</script>
+</body>
+</html>
