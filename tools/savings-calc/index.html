@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Savings Goal Calculator — How Long to Save for Your Goal?</title>
+<meta name="description" content="Calculate how long it takes to reach your savings goal. Free online savings calculator with weekly and monthly breakdowns.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,sans-serif;background:#0f0f0f;color:#e5e5e5;padding:20px}
+h1{text-align:center;font-size:28px;margin:30px 0 8px}h1 span{color:#f59e0b}
+.sub{text-align:center;color:#666;margin-bottom:30px;font-size:14px}
+.app{max-width:500px;margin:0 auto}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:13px;color:#888;margin-bottom:6px}
+.field input{width:100%;padding:14px;background:#1a1a1a;border:1px solid#333;border-radius:8px;color:#e5e5e5;font-size:16px;outline:none}
+.field input:focus{border-color:#f59e0b}
+.btn{width:100%;padding:16px;background:#f59e0b;color:#0f0f0f;border:none;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;margin-top:10px}
+.result{background:#1a1a1a;border:1px solid#333;border-radius:12px;padding:24px;margin-top:20px;display:none}
+.result h2{font-size:18px;margin-bottom:16px;color:#f59e0b}
+.result .row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid#222;font-size:14px}
+.result .row .val{color:#f59e0b;font-weight:700}
+.promo{background:#1a1a2e;border:1px solid#333;border-radius:12px;padding:24px;margin-top:30px;text-align:center}
+.promo h3{font-size:16px;margin-bottom:10px}
+.promo a{color:#22c55e;text-decoration:none;font-weight:600;font-size:14px}
+footer{text-align:center;padding:30px;color:#333;font-size:12px}
+</style>
+</head>
+<body>
+<h1>Savings <span>Goal Calculator</span></h1>
+<p class="sub">How long until you reach your savings goal?</p>
+<div class="app">
+<div class="field"><label>Your savings goal ($)</label><input type="number" id="goal" placeholder="10000"></div>
+<div class="field"><label>Current savings ($)</label><input type="number" id="current" placeholder="500" value="0"></div>
+<div class="field"><label>Monthly savings ($)</label><input type="number" id="monthly" placeholder="500"></div>
+<div class="field"><label>Annual interest rate (%)</label><input type="number" id="rate" placeholder="4" value="4" step="0.1"></div>
+<button class="btn" onclick="calc()">Calculate →</button>
+<div class="result" id="result">
+<h2>Your savings plan</h2>
+<div class="row"><span>Months to goal</span><span class="val" id="rMonths">-</span></div>
+<div class="row"><span>Years to goal</span><span class="val" id="rYears">-</span></div>
+<div class="row"><span>Total contributed</span><span class="val" id="rContrib">-</span></div>
+<div class="row"><span>Interest earned</span><span class="val" id="rInterest">-</span></div>
+<div class="row"><span>Weekly savings needed</span><span class="val" id="rWeekly">-</span></div>
+<div class="row"><span>Daily savings needed</span><span class="val" id="rDaily">-</span></div>
+</div>
+<div class="promo">
+<h3>Track your budget properly</h3>
+<a href="https://novacryptolabs.gumroad.com/l/ecoaue">Monthly Budget Tracker — $3.99 printable PDF →</a>
+<br><br>
+<a href="https://novacryptolabs.gumroad.com/l/msbty" style="color:#a78bfa;font-size:13px">Daily Gratitude Journal — $5.99</a> |
+<a href="https://flightsmoothie-dot.github.io/novacrypto-assets/tools/pomodoro/" style="color:#a78bfa;font-size:13px">Free Pomodoro Timer</a>
+</div>
+</div>
+<footer>Free forever. No ads. © 2026</footer>
+<script>
+function calc(){
+var goal=parseFloat(document.getElementById('goal').value)||0;
+var cur=parseFloat(document.getElementById('current').value)||0;
+var mo=parseFloat(document.getElementById('monthly').value)||0;
+var rate=(parseFloat(document.getElementById('rate').value)||0)/100/12;
+if(!goal||!mo){alert('Enter goal and monthly savings');return}
+var balance=cur,months=0,maxMonths=600;
+while(balance<goal&&months<maxMonths){balance=balance*(1+rate)+mo;months++}
+var totalContrib=cur+mo*months;
+var interest=balance-totalContrib;
+document.getElementById('rMonths').textContent=months;
+document.getElementById('rYears').textContent=(months/12).toFixed(1);
+document.getElementById('rContrib').textContent='$'+totalContrib.toLocaleString();
+document.getElementById('rInterest').textContent='$'+Math.round(interest).toLocaleString();
+document.getElementById('rWeekly').textContent='$'+(mo/4.33).toFixed(0);
+document.getElementById('rDaily').textContent='$'+(mo/30).toFixed(0);
+document.getElementById('result').style.display='block'}
+</script>
+</body>
+</html>
