@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Word Counter — Count Words, Characters, Sentences Online</title>
+<meta name="description" content="Free online word counter tool. Count words, characters, sentences, paragraphs, and reading time. No signup. Instant results.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,sans-serif;background:#0f0f0f;color:#e5e5e5;padding:20px}
+h1{text-align:center;font-size:28px;margin:30px 0 8px}h1 span{color:#22c55e}
+.sub{text-align:center;color:#666;margin-bottom:30px;font-size:14px}
+.app{max-width:800px;margin:0 auto}
+textarea{width:100%;min-height:250px;background:#1a1a1a;border:1px solid#333;border-radius:10px;padding:20px;color:#e5e5e5;font-size:15px;line-height:1.7;resize:vertical;outline:none}
+textarea:focus{border-color:#22c55e}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:20px 0}
+.stat{background:#1a1a1a;border:1px solid#222;border-radius:10px;padding:16px;text-align:center}
+.stat .num{font-size:28px;font-weight:800;color:#22c55e}
+.stat .label{font-size:11px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px}
+.promo{background:#1a1a2e;border:1px solid#333;border-radius:12px;padding:24px;margin-top:30px;text-align:center}
+.promo h3{font-size:16px;margin-bottom:10px}
+.promo a{color:#a78bfa;text-decoration:none;display:inline-block;margin:5px 10px;font-size:13px}
+footer{text-align:center;padding:30px;color:#333;font-size:12px}
+</style>
+</head>
+<body>
+<h1>Free <span>Word Counter</span></h1>
+<p class="sub">Paste or type your text. Get instant word count, character count, reading time.</p>
+<div class="app">
+<textarea id="text" placeholder="Start typing or paste your text here..." oninput="count()"></textarea>
+<div class="stats">
+<div class="stat"><div class="num" id="words">0</div><div class="label">Words</div></div>
+<div class="stat"><div class="num" id="chars">0</div><div class="label">Characters</div></div>
+<div class="stat"><div class="num" id="charsNoSpace">0</div><div class="label">No Spaces</div></div>
+<div class="stat"><div class="num" id="sentences">0</div><div class="label">Sentences</div></div>
+<div class="stat"><div class="num" id="paragraphs">0</div><div class="label">Paragraphs</div></div>
+<div class="stat"><div class="num" id="readTime">0</div><div class="label">Min Read</div></div>
+</div>
+<div class="promo">
+<h3>More free tools</h3>
+<a href="https://flightsmoothie-dot.github.io/novacrypto-assets/repurpose-ai/">RepurposeAI — Blog → 10 Social Posts</a> |
+<a href="https://flightsmoothie-dot.github.io/novacrypto-assets/tools/pomodoro/">Pomodoro Timer</a> |
+<a href="https://novacryptolabs.gumroad.com/l/gbuxqh">Printable Weekly Planner ($4.99)</a>
+</div>
+</div>
+<footer>Free forever. No ads. No tracking. © 2026</footer>
+<script>
+function count(){var t=document.getElementById('text').value;
+var w=t.trim()?t.trim().split(/\s+/).length:0;
+var c=t.length;var cn=t.replace(/\s/g,'').length;
+var s=t.split(/[.!?]+/).filter(x=>x.trim()).length;
+var p=t.split(/\n\n+/).filter(x=>x.trim()).length;
+var r=Math.ceil(w/200);
+document.getElementById('words').textContent=w;
+document.getElementById('chars').textContent=c;
+document.getElementById('charsNoSpace').textContent=cn;
+document.getElementById('sentences').textContent=s;
+document.getElementById('paragraphs').textContent=p;
+document.getElementById('readTime').textContent=r;}
+</script>
+</body>
+</html>
