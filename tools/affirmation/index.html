@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Affirmation Generator — Free Positive Affirmations</title>
+<meta name="description" content="Get a new positive affirmation every time you visit. Free daily affirmation generator for mindfulness, gratitude, and self-improvement.">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:Georgia,serif;background:#1a1a2e;color:#e5e5e5;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px}
+.card{max-width:600px;text-align:center;padding:40px}
+.small{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a78bfa;margin-bottom:30px}
+.affirmation{font-size:clamp(24px,5vw,36px);line-height:1.5;font-style:italic;color:#f0e6d3;margin-bottom:40px}
+.btn{padding:12px 30px;background:transparent;border:1px solid#a78bfa;color:#a78bfa;border-radius:30px;font-size:14px;cursor:pointer;transition:.2s;font-family:Georgia,serif}
+.btn:hover{background:#a78bfa22}
+.promo{margin-top:60px;padding:20px;border-top:1px solid#222;text-align:center}
+.promo p{color:#555;font-size:13px;margin-bottom:8px;font-family:-apple-system,sans-serif}
+.promo a{color:#a78bfa;text-decoration:none;font-size:14px;font-family:-apple-system,sans-serif}
+</style>
+</head>
+<body>
+<div class="card">
+<div class="small">Your Daily Affirmation</div>
+<div class="affirmation" id="aff"></div>
+<button class="btn" onclick="next()">New Affirmation ✨</button>
+</div>
+<div class="promo">
+<p>Want to practice gratitude daily?</p>
+<a href="https://novacryptolabs.gumroad.com/l/msbty">90-Day Gratitude Journal — $5.99 printable PDF →</a>
+</div>
+<script>
+var a=["I am worthy of good things happening in my life.","Today I choose progress over perfection.","I trust the process, even when I can't see the results yet.","I am becoming the person I want to be, one day at a time.","My potential is limitless. My growth is constant.","I release what I cannot control and focus on what I can.","Every small step forward is still a step forward.","I am grateful for this moment and the possibilities it holds.","My challenges are opportunities to grow stronger.","I deserve rest just as much as I deserve success.","I am enough, exactly as I am right now.","Today is a fresh start. Yesterday's mistakes don't define me.","I attract positive energy by being positive energy.","My voice matters. My ideas matter. I matter.","I am building a life I'm proud of, brick by brick.","Difficult roads often lead to beautiful destinations.","I choose to see the good in every situation.","I am resilient. I have survived 100% of my worst days.","My gratitude turns what I have into more than enough.","I am not behind. I am exactly where I need to be.","I give myself permission to take things one step at a time.","Today I will be kind to myself and others.","I am worthy of love, success, and happiness.","My inner peace is more important than being right.","I choose courage over comfort today.","I am learning, growing, and evolving every single day.","What I focus on expands. I choose to focus on the good.","I trust myself to make the right decisions.","I am the author of my own story.","Today I will do one thing that my future self will thank me for."];
+function next(){document.getElementById('aff').textContent='"'+a[Math.floor(Math.random()*a.length)]+'"'}
+next();
+</script>
+</body>
+</html>
